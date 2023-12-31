@@ -1,10 +1,10 @@
 ---
-title: { { search-by-image } }
-emoji: { { emoji } }
-colorFrom: { { colorFrom } }
-colorTo: { { colorTo } }
-sdk: { { sdk } }
-sdk_version: { { sdkVersion } }
+title: Search-By-Image
+emoji: 💻
+colorFrom: indigo
+colorTo: green
+sdk: streamlit
+sdk_version: 1.29.0
 app_file: app.py
 pinned: false
 ---
