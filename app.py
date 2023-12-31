@@ -15,6 +15,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 FOLDER = "images/"
 NUM_TREES = 100
 FEATURES = 1000
+FILETYPES = [".png", ".jpg", ".jpeg", ".tiff", ".bmp"]
 
 
 @st.cache_resource
@@ -53,12 +54,11 @@ def get_all_file_paths(folder_path):
     file_paths = []
     for root, _, files in os.walk(folder_path):
         for file in files:
-            if not file.lower().endswith(
-                (".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".gif")
-            ):
+            if not file.lower().endswith(tuple(FILETYPES)):
                 continue
             file_path = os.path.join(root, file)
             file_paths.append(file_path)
+    print(f"Total {len(file_paths)} image files present")
     return file_paths
 
 
@@ -172,7 +172,8 @@ if __name__ == "__main__":
 
         # File uploader
         uploaded_file = st.file_uploader(
-            "Choose an image like a car, cat, dog, flower, fruits, bike, aeroplane, person"
+            "Choose an image like a car, cat, dog, flower, fruits, bike, aeroplane, person",
+            type=FILETYPES,
         )
 
         n_matches = st.slider(
