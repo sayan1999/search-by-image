@@ -87,7 +87,7 @@ def get_all_file_paths(folder_path):
             file_path = os.path.join(root, file)
             file_paths.append(file_path)
     print(f"Total {len(file_paths)} image files present")
-    return file_paths
+    return sorted(file_paths)
 
 
 # Load all the images from file paths
