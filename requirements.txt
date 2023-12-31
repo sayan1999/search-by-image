@@ -5,3 +5,4 @@ streamlit
 tqdm
 python-slugify
 opendatasets
+azure-storage-blob

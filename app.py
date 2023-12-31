@@ -10,12 +10,40 @@ from PIL import ImageFile
 from slugify import slugify
 import opendatasets as od
 import json
+import argparse
+
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 FOLDER = "images/"
 NUM_TREES = 100
 FEATURES = 1000
 FILETYPES = [".png", ".jpg", ".jpeg", ".tiff", ".bmp"]
+
+from azure.storage.blob import BlobServiceClient
+
+
+@st.cache_resource
+def dl_embeddings():
+    """dl pretrained embeddings in production environment instead of creating"""
+    # Connect to your Blob Storage account
+    connect_str = st.secrets["connectionstring"]
+    blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+
+    # Specify container and blob names
+    container_name = "imagessearch"
+    blob_name = f"{slugify(FOLDER)}.tree"
+
+    # Get a reference to the blob
+    blob_client = blob_service_client.get_blob_client(
+        container=container_name, blob=blob_name
+    )
+
+    # Download the binary data
+    download_file_path = f"{slugify(FOLDER)}.tree"  # Path to save the downloaded file
+    with open(download_file_path, "wb") as download_file:
+        download_file.write(blob_client.download_blob().readall())
+
+    print(f"File downloaded to: {download_file_path}")
 
 
 @st.cache_resource
@@ -168,6 +196,11 @@ if __name__ == "__main__":
 
     try:
         load_dataset()
+        # download dev embeddings if not developement environment
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--dev", action="store_true")
+        if not ap.parse_args().dev:
+            dl_embeddings()
         save_embedding(FOLDER)
 
         # File uploader

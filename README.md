@@ -48,8 +48,18 @@ pip install -r requirements.txt
 
 3. Run the Streamlit app:
 
+for quickly dl embeddings and skipp training
+
 ```bash
 streamlit run app.py
+```
+
+or
+
+to rebuild embeddings
+
+```bash
+streamlit run app.py -- --dev
 ```
 
 4. Access the app in your web browser (usually at http://localhost:8501).
