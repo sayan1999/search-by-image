@@ -1,0 +1,7 @@
+annoy
+torch
+torchvision
+streamlit
+tqdm
+python-slugify
+opendatasets
