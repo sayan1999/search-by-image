@@ -1,4 +1,5 @@
-annoy
+faiss-cpu
+faiss-gpu
 torch
 torchvision
 streamlit
@@ -6,3 +7,4 @@ tqdm
 python-slugify
 opendatasets
 azure-storage-blob
+streamlit-cropper
