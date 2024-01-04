@@ -190,8 +190,10 @@ def build_annoy_index(features):
     print("Building faiss index:")
     f = features[0].shape[0]  # Feature dimensionality
     index = faiss.IndexIDMap(faiss.IndexFlatIP(f))
+    features = features.cpu().detach().numpy()
+    faiss.normalize_L2(features)
     index.add_with_ids(
-        features.cpu().detach().numpy(), np.array(range(len(features)))
+        features, np.array(range(len(features)))
     )  # Adjust num_trees for accuracy vs. speed trade-off
     print("built faiss index:")
     return index
@@ -206,6 +208,7 @@ def search_similar_images(query_image, num_results, f=FEATURES):
     proc_image = preprocess_image(query_image).unsqueeze(0).to(DEVICE)
     query_feature = model(proc_image)
     query_feature = query_feature.cpu().detach().numpy()
+    faiss.normalize_L2(query_feature)
     distances, nearest_neighbors = index.search(
         query_feature,
         num_results,
@@ -232,7 +235,7 @@ def display_image(idx, dist):
     # print(file_paths[idx])
     image = Image.open(file_paths[idx])
     st.image(image.resize([256, 256]))
-    st.markdown("SimScore: -" + str(round(-dist, 2)))
+    st.markdown("SimScore: " + str(round(dist, 2)))
     # st.markdown(file_paths[idx])
 
 
