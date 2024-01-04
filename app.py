@@ -229,9 +229,10 @@ def save_embedding(folder=FOLDER):
 
 def display_image(idx, dist):
     file_paths = get_all_file_paths(folder_path=FOLDER)
+    # print(file_paths[idx])
     image = Image.open(file_paths[idx])
     st.image(image.resize([256, 256]))
-    st.markdown("SimScore: -" + str(round(dist, 2)))
+    st.markdown("SimScore: -" + str(round(-dist, 2)))
     # st.markdown(file_paths[idx])
 
 
@@ -260,10 +261,10 @@ if __name__ == "__main__":
         )
 
         if uploaded_file is not None:
-            query_image = Image.open(uploaded_file)
-            cropped = st_cropper(query_image)
+            query_image = Image.open(uploaded_file).resize([224, 224])
+            cropped = st_cropper(query_image, default_coords=[10, 240, 10, 240])
             query_image, nearest_neighbors, distances = search_similar_images(
-                cropped.resize([256, 256]), n_matches
+                cropped.resize([224, 224]), n_matches
             )
 
             st.subheader("Similar Images:")
