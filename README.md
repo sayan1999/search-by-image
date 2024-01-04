@@ -13,7 +13,7 @@ pinned: false
 
 ## Description
 
-### A very fast reverse image search webapp in streamlit using NVIDIA's EfficientNet and Spotify's Annoy library over atleast 7000 images.
+### A very fast reverse image search webapp in streamlit using NVIDIA's EfficientNet and Facebook's Faiss library over approx 70000 images (224x224). (Trains turbo fast (4.30 miuntes) on 4GB GTX1650 GPU)
 
 Upload a picture, and AI powered by deep learning will instantly show you visually related matches. Explore and discover connections through the magic of image recognition.
 
@@ -29,7 +29,7 @@ Experience the app in action right in your browser: https://huggingface.co/space
 - Explore retrieved images to discover related content.
 - Adjust the number of matches displayed for visual comparisons.
 - Utilizes a pre-trained image feature extractor model (EfficientNet-b0) for accurate image similarity.
-- Employs Annoy index for fast approximate nearest neighbor search.
+- Employs FAISS index for fast approximate nearest neighbor search.
 - Offers a user-friendly interface powered by Streamlit.
 
 ## Getting Started
@@ -69,7 +69,7 @@ streamlit run app.py -- --dev
 Streamlit: Framework for building and deploying web apps in Python.
 Torch: Powerful deep learning framework.
 OpenDatasets: Library for convenient dataset downloading.
-Annoy: Library for fast approximate nearest neighbor search.
+FAISS: Facebook's fast AI vector similarity search
 NVIDIA EfficientNet-b0: Pre-trained image classification model for feature extraction.
 
 ## Usage
