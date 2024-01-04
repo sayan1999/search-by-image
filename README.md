@@ -13,7 +13,7 @@ pinned: false
 
 ## Description
 
-### A very fast reverse image search webapp in streamlit using NVIDIA's EfficientNet and Facebook's Faiss library over approx 70000 images (224x224). (Trains turbo fast (4.30 miuntes) on 4GB GTX1650 GPU)
+### A very fast reverse image search webapp in streamlit using NVIDIA's EfficientNet and Facebook's Faiss library. 70000 images (224x224), 4GB GTX1650: FAISS GPU in 10 secs vs 30 mins with Annoy CPU
 
 Upload a picture, and AI powered by deep learning will instantly show you visually related matches. Explore and discover connections through the magic of image recognition.
 

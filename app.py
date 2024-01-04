@@ -261,7 +261,7 @@ if __name__ == "__main__":
         )
 
         if uploaded_file is not None:
-            query_image = Image.open(uploaded_file).resize([224, 224])
+            query_image = Image.open(uploaded_file).resize([256, 256])
             cropped = st_cropper(query_image, default_coords=[10, 240, 10, 240])
             query_image, nearest_neighbors, distances = search_similar_images(
                 cropped.resize([224, 224]), n_matches
