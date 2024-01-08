@@ -17,6 +17,7 @@ from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms
 import numpy as np
 import faiss.contrib.torch_utils
+from efficientnet_pytorch import EfficientNet
 
 BATCH_SIZE = 200
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -24,7 +25,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 FOLDER = "images/"
 NUM_TREES = 100
 FEATURES = 1000
-FILETYPES = [".png", ".jpg", ".jpeg", ".tiff", ".bmp"]
+FILETYPES = [".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".webp"]
 LIBRARIES = [
     "https://www.kaggle.com/datasets/athota1/caltech101",
     "https://www.kaggle.com/datasets/gpiosenka/sports-classification",
@@ -82,11 +83,7 @@ def load_dataset():
 def load_model():
     """Loads a pre-trained image feature extractor model."""
     print("Loading pretrained model...")
-    model = torch.hub.load(
-        "NVIDIA/DeepLearningExamples:torchhub",
-        "nvidia_efficientnet_b0",
-        pretrained=True,
-    )
+    model = EfficientNet.from_pretrained('efficientnet-b2')
     model.eval()  # Set model to evaluation mode
     return model
 
